@@ -35,11 +35,11 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Add changes" -a
+      continue-on-error: true
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-      continue-on-error: true
   push_to_github_cr:
     needs: build
     name: Push to GitHub Container Registry
