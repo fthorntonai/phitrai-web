@@ -40,6 +40,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
   push_to_github_cr:
     needs: build
     name: Push to GitHub Container Registry
@@ -64,8 +65,11 @@ jobs:
         with:
             context: .
             push: true
-            tags: ${{ steps.meta.outputs.tags }}
-            labels: ${{ steps.meta.outputs.labels }}
+            tags: ghcr.io/${{ github.repository }}:latest
+            labels: |
+              org.opencontainers.image.title=Phitr.ai Web
+              org.opencontainers.image.description=Phitr.ai Web
+              org.opencontainers.image.source=test
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
