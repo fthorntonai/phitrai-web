@@ -39,6 +39,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
   push_to_github_cr:
     needs: build
     name: Push to GitHub Container Registry
